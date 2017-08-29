@@ -10,6 +10,13 @@ import UIKit
 
 class todoListTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var completionButton: UIButton!
+    @IBOutlet weak var taskName: UILabel!
+    
+    
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

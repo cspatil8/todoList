@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Cce-Ys-oNu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Todo List Table View Controller-->
+        <!--Your Task List-->
         <scene sceneID="q2w-PH-tgl">
             <objects>
                 <tableViewController id="w0d-MB-Fr1" customClass="TodoListTableViewController" customModule="todoList" customModuleProvider="target" sceneMemberID="viewController">
@@ -39,6 +39,10 @@
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="completionButton" destination="hds-fK-jVs" id="Yic-Gw-jBb"/>
+                                    <outlet property="taskName" destination="g9h-zY-vAU" id="NOa-5k-sSF"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="QwR-Kr-dTY">
                                 <rect key="frame" x="0.0" y="72" width="375" height="44"/>
@@ -54,10 +58,109 @@
                             <outlet property="delegate" destination="w0d-MB-Fr1" id="nIW-ss-gbB"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Your Task List" id="sdY-N9-eG8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="2OH-d4-hjO">
+                            <color key="tintColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="dkC-tC-DDP" kind="show" id="GfO-Nc-7QT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="16T-ap-34a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="186" y="125"/>
+            <point key="canvasLocation" x="625" y="170"/>
+        </scene>
+        <!--Task Detail View Controller-->
+        <scene sceneID="FyZ-ie-MCI">
+            <objects>
+                <viewController id="dkC-tC-DDP" customClass="TaskDetailViewController" customModule="todoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Ie-vI-NF2"/>
+                        <viewControllerLayoutGuide type="bottom" id="11e-lv-46q"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="loh-Rx-iY1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lMQ-hh-Xf2">
+                                <rect key="frame" x="0.0" y="72" width="375" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="saveTaskName:forEvent:" destination="dkC-tC-DDP" eventType="editingDidEnd" id="Fik-4T-fjG"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Due Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XFP-rS-J1S">
+                                <rect key="frame" x="0.0" y="110" width="375" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="triggerDatePicker:" destination="dkC-tC-DDP" eventType="editingDidBegin" id="qLT-qr-aW6"/>
+                                </connections>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dpb-84-LZ6">
+                                <rect key="frame" x="0.0" y="148" width="375" height="175"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES" lookupSuggestion="YES"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vl7-aD-2Lp">
+                                <rect key="frame" x="169" y="331" width="37" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="returnBackToList:" destination="dkC-tC-DDP" eventType="touchUpInside" id="mVp-Gq-CqZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dpb-84-LZ6" firstAttribute="top" secondItem="XFP-rS-J1S" secondAttribute="bottom" constant="8" symbolic="YES" id="2Yz-wf-3TN"/>
+                            <constraint firstItem="lMQ-hh-Xf2" firstAttribute="trailing" secondItem="XFP-rS-J1S" secondAttribute="trailing" id="7FR-9r-SWg"/>
+                            <constraint firstAttribute="trailing" secondItem="lMQ-hh-Xf2" secondAttribute="trailing" id="7Mm-ch-bMJ"/>
+                            <constraint firstItem="XFP-rS-J1S" firstAttribute="leading" secondItem="dpb-84-LZ6" secondAttribute="leading" id="CSt-xE-UpE"/>
+                            <constraint firstItem="lMQ-hh-Xf2" firstAttribute="leading" secondItem="loh-Rx-iY1" secondAttribute="leading" id="LS1-oq-XD5"/>
+                            <constraint firstItem="lMQ-hh-Xf2" firstAttribute="top" secondItem="8Ie-vI-NF2" secondAttribute="bottom" constant="8" symbolic="YES" id="OhA-wY-XDa"/>
+                            <constraint firstItem="vl7-aD-2Lp" firstAttribute="top" secondItem="dpb-84-LZ6" secondAttribute="bottom" constant="8" symbolic="YES" id="T7X-BE-O5V"/>
+                            <constraint firstItem="vl7-aD-2Lp" firstAttribute="centerX" secondItem="dpb-84-LZ6" secondAttribute="centerX" id="XDx-zi-Bwn"/>
+                            <constraint firstItem="XFP-rS-J1S" firstAttribute="top" secondItem="lMQ-hh-Xf2" secondAttribute="bottom" constant="8" symbolic="YES" id="akz-Qj-Ype"/>
+                            <constraint firstItem="lMQ-hh-Xf2" firstAttribute="leading" secondItem="XFP-rS-J1S" secondAttribute="leading" id="cs2-Ab-abj"/>
+                            <constraint firstItem="11e-lv-46q" firstAttribute="top" secondItem="dpb-84-LZ6" secondAttribute="bottom" constant="344" id="xtI-ay-iVT"/>
+                            <constraint firstItem="XFP-rS-J1S" firstAttribute="trailing" secondItem="dpb-84-LZ6" secondAttribute="trailing" id="zyM-cf-xha"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dueDateTextField" destination="XFP-rS-J1S" id="Ypd-fY-7rC"/>
+                        <outlet property="nameTextField" destination="lMQ-hh-Xf2" id="iV6-da-5rM"/>
+                        <outlet property="taskDescription" destination="dpb-84-LZ6" id="F6W-Lq-mXb"/>
+                        <segue destination="Jxk-Sb-JA8" kind="unwind" identifier="returnFromTaskDetail" unwindAction="unwindToThisViewControllerWithSegue:" id="7YK-2W-DnS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G36-aE-kJ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Jxk-Sb-JA8" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1469.5999999999999" y="169.56521739130437"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="rmj-ev-tYO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Cce-Ys-oNu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DcX-Pg-vbT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="w0d-MB-Fr1" kind="relationship" relationship="rootViewController" id="syB-lC-fHv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eYL-m1-etf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-234.40000000000001" y="170.46476761619192"/>
         </scene>
     </scenes>
 </document>

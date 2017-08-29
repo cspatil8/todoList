@@ -1,5 +1,5 @@
 //
-//  TodoList.swift
+//  Task.swift
 //  todoList
 //
 //  Created by Chinmay Patil on 8/25/17.
@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-class TodoList: NSManagedObject {
-
+class Task: NSManagedObject {
+    
+    
 }
